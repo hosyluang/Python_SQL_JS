@@ -1,0 +1,49 @@
+{% include 'layout/header.html' %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Account</h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{{ url_for('login.account') }}">account</a>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{{ url_for('product.my_product') }}">My product</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/category-products-->
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="blog-post-area">
+                    <h2 class="title text-center">ADD PRODUCTS</h2>
+                    <div class="signup-form">
+                        <!--sign up form-->
+                        <h2>New Product</h2>
+                        <form action="/add-product" method="POST" enctype="multipart/form-data">
+                            <!-- <input type="text" placeholder="ID" name="id" value="{{id}}" /> -->
+                            <input type="text" placeholder="Title" name="title" value="{{title}}" />
+                            <input type="number" placeholder="Price" name="price" required step="0.01" />
+                            <input type="file" style="background: none" name="image" value="{{file}}" />
+                            <button type="submit" class="btn btn-default">ADD</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'layout/footer.html' %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .error {
+                color: red;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        {% include 'layout/header.html' %}
+        <section id="form">
+            <!--form-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <div class="login-form">
+                            <!--login form-->
+                            <h2>THÀNH VIÊN ĐĂNG NHẬP</h2>
+                            <form action="/login" method="POST" enctype="multipart/form-data>">
+                                <input type="email" placeholder="Email" value="{{email}}" name="email"/>
+                                {% if errors.get('email') %}
+                                <span class="error">{{ errors['email'] }}</span>
+                                <br />
+                                {% endif %}
+                                <input type="password" placeholder="Password" value="{{password}}" name="password"/>
+                                {% if errors.get('password') %}
+                                <span class="error">{{ errors['password'] }}</span>
+                                <br />
+                                {% endif %}
+                                <button type="submit" class="btn btn-default">Login</button>
+                            </form>
+                            {% if ketqua %}
+                            <p style="color: red; font-size: 30px">{{ ketqua }}</p>
+                            {% endif %}
+                        </div>
+                        <!--/login form-->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--/form-->
+
+        {% include 'layout/footer.html' %}
+    </body>
+</html>

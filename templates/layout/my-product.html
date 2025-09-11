@@ -1,0 +1,91 @@
+{% include 'layout/header.html' %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Account</h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{{ url_for('login.account') }}">account</a>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a href="{{ url_for('product.my_product') }}">My product</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/category-products-->
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="table-responsive cart_info">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="cart_menu">
+                                <td class="image">image</td>
+                                <td class="description">name</td>
+                                <td class="price">price</td>
+                                <td class="total">action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr>
+                                        <td class="cart_product">
+                                            <a href=""><img src="static/images/cart/one.png" alt="" /></a>
+                                        </td>
+                                        <td class="cart_description">
+                                            <h4><a href="">Colorblock Scuba</a></h4>
+                                        </td>
+                                        <td class="cart_price">
+                                            <p>$59</p>
+                                        </td>
+
+                                        <td class="cart_total">
+                                            <a>edit</a>
+                                            <a>delete</a>
+                                        </td>
+                                    </tr> -->
+                            {% for product in products %}
+                            <tr>
+                                <td class="cart_product">
+                                    {% if product.image %}
+                                    <img src="{{ url_for('uploaded_file', filename=product['image']) }}" width="100" />
+                                    {% else %} Không có ảnh {% endif %}
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a href="">{{ product.title }}</a></h4>
+                                </td>
+                                <td class="cart_price">
+                                    <p>{{ product.price }}</p>
+                                </td>
+                                <td class="cart_total">
+                                    <a href="{{ url_for('product.edit_product', id=product.id) }}">edit</a>
+                                    |
+                                    <a
+                                        href="{{ url_for('product.delete_product', id=product.id) }}"
+                                        onclick="return confirm('Are you sure to delete?');"
+                                    >
+                                        delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{{ url_for('product.add_product') }}" class="btn btn-default">ADD</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'layout/footer.html' %}
