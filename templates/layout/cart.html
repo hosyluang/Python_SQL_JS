@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Danh sách sản phẩm</title>
+    </head>
+
+    <body>
+        <h2>Danh sách sản phẩm</h2>
+        <a href="/">+ Thêm sản phẩm</a>
+        <br />
+        <br />
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Hình ảnh</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>
+                        {% if product.image %}
+                        <img src="/uploads/{{ product.image }}" width="100" />
+                        {% else %} Không có ảnh {% endif %}
+                    </td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.qty }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- <h1><button class="add-btn" id="5">test ajax</button></h1> -->
+        <a href="/show-cart">cart</a>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </body>
+</html>

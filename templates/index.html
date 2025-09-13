@@ -1,6 +1,4 @@
-{% extends 'layout/main.html' %}
-
-{% block content %}
+{% extends 'layout/main.html' %} {% block content %}
 <section id="slider">
     <!--slider-->
     <div class="container">
@@ -293,7 +291,7 @@
                     {% for product in products %}
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
-                            <div class="single-products">
+                            <div class="single-products" data-id="{{ product.id }}">
                                 <div id="product1" class="productinfo text-center">
                                     <img src="/uploads/{{ product.image }}" alt="" />
                                     <h2>${{ product.price }}</h2>
@@ -782,4 +780,28 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.add-to-cart').click(function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+            const product_id = $(this).closest('.single-products').data('id');
+            console.log(product_id);
+            $.ajax({
+                url: '/add-to-cart',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ product_id: product_id }),
+                success: function (response) {
+                    alert('Đã thêm');
+                    console.log(response);
+                },
+                error: function (err) {
+                    alert('Thêm thất bại');
+                },
+            });
+        });
+    });
+</script>
 {% endblock %}
